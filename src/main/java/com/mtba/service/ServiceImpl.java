@@ -21,18 +21,37 @@ public class ServiceImpl implements Service {
 
 	}
 
-	public List<Theatre> listOfTheatres_Playing_A_Movie(List<Theatre> theatre, Movie movie) {
-		List<Theatre> moviePlayingTheatres = new ArrayList<Theatre>();
-		for (Theatre t : theatre) {
-			if (t.getMovieList().contains(movie)) {
-				moviePlayingTheatres.add(t);
-			}
+	public List<Theatre> listOfTheatres_Playing_A_Movie(List<Theatre> theatres, Movie movie) {
+		if (theatres == null || movie == null || movie.getiD() == 0 || theatres.isEmpty()) {
+			return null;
 		}
+		if (!theatres.isEmpty()) {
+			for (Theatre t : theatres) {
+				if (t.getiD() == 0) {
+					return null;
+				}
+			}
+
+		}
+		//System.out.println(theatres);
+		//System.out.println(movie);
+		List<Theatre> moviePlayingTheatres = new ArrayList<Theatre>();
+
+		for (Theatre t : theatres) {
+			if(t.getMovieList()!=null) {
+				
+			moviePlayingTheatres.add(t);
+			
+			}
+
+		}
+
+		// System.out.println(moviePlayingTheatres);
 		return moviePlayingTheatres;
 	}
 
 	public List<Movie> listOfMovies_playing_in_Theatre(Theatre theatre) {
-		if (theatre == null) {
+		if (theatre == null || theatre.getiD() == 0) {
 			return null;
 		}
 
